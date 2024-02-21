@@ -1,4 +1,5 @@
 package Ejercicio4;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*Ejercicio Nº 4 - Operaciones de Lectura - Grupal
@@ -8,30 +9,43 @@ suma, resta, multiplicación y división. Muestra por pantalla/consola los resul
 import java.util.Scanner;
 
 public class Calculadora {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int numero1 = 0, numero2 = 0;
+        boolean datosValidos = false;
 
-        System.out.print("Ingrese el primer número: ");
-        int numero1 = scanner.nextInt();
+        while (!datosValidos) {
+            try {
+                System.out.print("Ingrese el primer número: ");
+                numero1 = scanner.nextInt();
 
-        System.out.print("Ingrese el segundo número: ");
-        int numero2 = scanner.nextInt();
+                System.out.print("Ingrese el segundo número: ");
+                numero2 = scanner.nextInt();
+
+                datosValidos = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, ingrese números enteros válidos.");
+                scanner.next();
+            }
+        }
 
         int suma = sumar(numero1, numero2);
         int resta = restar(numero1, numero2);
         int multiplicacion = multiplicar(numero1, numero2);
         double division = dividir(numero1, numero2);
 
-        System.out.println(" ");
-        System.out.println("------------RESULTADOS------------");
-        if (!Double.isNaN(division)) {
-            System.out.println("Resultado de la División: " + division);
-        }
+        System.out.println("\n------------RESULTADOS------------");
         System.out.println("Resultado de la Suma: " + suma);
         System.out.println("Resultado de la Resta: " + resta);
         System.out.println("Resultado de la Multiplicación: " + multiplicacion);
-        System.out.println("----------------------------------");
 
+        if (!Double.isNaN(division)) {
+            System.out.println("Resultado de la División: " + division);
+        } else {
+            System.out.println("No es posible dividir entre cero.");
+        }
+        System.out.println("----------------------------------");
 
         scanner.close();
     }
@@ -49,11 +63,10 @@ public class Calculadora {
     }
 
     public static double dividir(int a, int b) {
-        if (b != 0) {
-            return (double) a / b;
-        } else {
-            System.out.println("No se puede dividir por cero. La división se establece como " + Double.NaN + ".");
+        if (b == 0) {
             return Double.NaN;
+        } else {
+            return (double) a / b;
         }
     }
 }
