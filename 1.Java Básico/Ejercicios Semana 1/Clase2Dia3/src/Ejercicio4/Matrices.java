@@ -22,7 +22,9 @@ Crea un programa en Java que represente un mapa de asientos en una matriz de 5x5
     -El sistema deberá seguir corriendo hasta que el encargado de cargar las reservas de los asientos determine que ha finalizado.*/
 
 public class Matrices {
+    private static final int MATRIZ = 5;
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         ArrayList<ArrayList<Character>> mapaAsientos = inicializarMapaAsientos();
@@ -31,7 +33,7 @@ public class Matrices {
 
         boolean finalizado = false;
         while (!finalizado) {
-            System.out.print("Ingresa la fila (1-5) y el número de asiento (1-5) SEPARADOS POR UN ESPACIO (o escribe 'salir' para finalizar): ");
+            System.out.print("\nIngresa la fila (1-" + MATRIZ + ") y el número de asiento (1-" + MATRIZ + ") SEPARADOS POR UN ESPACIO (o escribe 'salir' para finalizar): ");
             String entrada = scanner.nextLine();
 
             if (entrada.equalsIgnoreCase("salir")) {
@@ -46,9 +48,9 @@ public class Matrices {
 
     private static ArrayList<ArrayList<Character>> inicializarMapaAsientos() {
         ArrayList<ArrayList<Character>> mapaAsientos = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < MATRIZ; i++) {
             ArrayList<Character> fila = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < MATRIZ; j++) {
                 fila.add('O'); // O = asiento vacío
             }
             mapaAsientos.add(fila);
@@ -62,7 +64,7 @@ public class Matrices {
             int fila = Integer.parseInt(partes[0]) - 1;
             int asiento = Integer.parseInt(partes[1]) - 1;
 
-            if (fila >= 0 && fila < 5 && asiento >= 0 && asiento < 5) {
+            if (fila >= 0 && fila < MATRIZ && asiento >= 0 && asiento < MATRIZ) {
                 if (mapaAsientos.get(fila).get(asiento) == 'O') {
                     mapaAsientos.get(fila).set(asiento, 'X'); // X = asiento ocupado
                     System.out.println("¡Asiento reservado con éxito!");
@@ -79,7 +81,8 @@ public class Matrices {
     }
 
     private static void mostrarMapa(ArrayList<ArrayList<Character>> mapa) {
-        System.out.println("\nMapa de Asientos:");
+        System.out.println("\n|--Mapa de Asiento--|");
+        System.out.println("---------------------");
         for (ArrayList<Character> fila : mapa) {
             System.out.print("| ");
             for (Character asiento : fila) {

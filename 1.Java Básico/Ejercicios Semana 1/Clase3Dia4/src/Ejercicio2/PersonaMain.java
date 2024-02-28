@@ -24,7 +24,7 @@ public class PersonaMain {
         personas[3] = new Persona(4, "Elena", 28, "Calle D #012", "444555666");
         personas[4] = new Persona(5, "Luis", 32, "Calle E #345", "777888999");
 
-        System.out.println("Datos de las personas:");
+        System.out.println("\nDatos de las personas:");
         for (Persona persona : personas) {
             if (persona.validarCampos()) {
                 System.out.println("Nombre: " + persona.getNombre() + ", Edad: " + persona.getEdad());
