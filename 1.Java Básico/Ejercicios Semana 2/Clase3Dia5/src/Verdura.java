@@ -47,7 +47,15 @@ public class Verdura {
 
     @Override
     public String toString() {
-        return "Verdura " + id + ", nombre = " + nombre + ", color = " + color +
-                ", calorias = " + calorias + ", ¿debe cocinarse? = " + debeCocinarse + ".";
+        return "VERDURA " + id +
+                "\nNombre = " + nombre +
+                "\nColor = " + color +
+                "\nCalorias = " + calorias +
+                "\n¿Debe cocinarse? = " + cocinarsiono() + ".\n";
     }
+
+    private String cocinarsiono() {
+        return debeCocinarse ? "Si" : "No";
+    }
+
 }
