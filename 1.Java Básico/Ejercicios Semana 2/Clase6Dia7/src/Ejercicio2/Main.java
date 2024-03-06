@@ -20,7 +20,7 @@ public class Main {
 
         Producto mayorPrecioVenta = encontrarProductoConMayorPrecioVenta(productos);
         Producto menorPrecioCosto = encontrarProductoConMenorPrecioCosto(productos);
- 
+
         System.out.println("Producto con mayor precio de venta: " + mayorPrecioVenta);
         System.out.println("Producto con menor precio de costo: " + menorPrecioCosto);
 
