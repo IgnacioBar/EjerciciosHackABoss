@@ -2,6 +2,9 @@ package com.mycompany.pruebatecnica1.persistencia;
 
 import com.mycompany.pruebatecnica1.logica.Empleado;
 import com.mycompany.pruebatecnica1.persistencia.exceptions.NonexistentEntityException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -14,28 +17,41 @@ public class ControladoraPersistencia {
         Scanner scanner = new Scanner(System.in);
         
     public void crearEmpleado() {
-        
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
+        try {
+            Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Apellido: ");
-        String apellido = scanner.nextLine();
+            System.out.print("Nombre: ");
+            String nombre = scanner.nextLine();
 
-        System.out.print("Cargo: ");
-        String cargo = scanner.nextLine();
+            System.out.print("Apellido: ");
+            String apellido = scanner.nextLine();
 
-        System.out.print("Salario: ");
-        double salario = scanner.nextDouble();
-        scanner.nextLine();
+            System.out.print("Cargo: ");
+            String cargo = scanner.nextLine();
 
-        System.out.print("Fecha de Inicio (DD-MM-YYYY): ");
-        String fechaInicio = scanner.nextLine();
+            System.out.print("Salario: ");
+            double salario = scanner.nextDouble();
+            scanner.nextLine();
+            
+            System.out.print("Fecha de Inicio (DD-MM-YYYY): ");
+            String fechaInicio = scanner.nextLine();
 
-        Empleado emple = new Empleado(nombre, apellido, cargo, salario, fechaInicio);
+            if (salario < 0) {
+                throw new IllegalArgumentException("Error: El salario no puede ser negativo.");
+            }
 
-        empleJpa.create(emple);
-        
-        System.out.println("\nEmpleado agregado correctamente.");
+            Empleado emple = new Empleado(nombre, apellido, cargo, salario, fechaInicio);
+
+            empleJpa.create(emple);
+
+            System.out.println("\nEmpleado agregado correctamente.");
+        } catch (InputMismatchException e) {
+            System.out.println("Error: Se esperaba un valor numérico para el salario.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error desconocido: " + e.getMessage());
+        }
     }
 
     public List<Empleado> traerEmpleados() {
