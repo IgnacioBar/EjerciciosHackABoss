@@ -2,20 +2,24 @@ package Ejercicio2;
 
 public class Main {
     public static void main(String[] args) {
-        Tarea proyecto = new TareaImpl("Proyecto: Desarrollo de Software");
+        Tarea proyecto = new Tarea("Proyecto Final");
+        Tarea investigacion = new Tarea("Investigación");
+        Tarea desarrollo = new Tarea("Desarrollo");
+        Tarea testing = new Tarea("Testing");
 
-        Tarea disenoApp = new TareaImpl("Tarea Principal: Diseño de la Aplicación");
-        disenoApp.agregarSubtarea(new TareaImpl("Subtarea: Crear Prototipo"));
+        proyecto.agregarSubtarea(investigacion);
+        proyecto.agregarSubtarea(desarrollo);
+        proyecto.agregarSubtarea(testing);
 
-        Tarea disenarInterfaz = new TareaImpl("Subtarea: Diseñar Interfaz");
-        disenarInterfaz.agregarSubtarea(new TareaImpl("Sub-subtarea: Definir Esquema de Colores"));
-        disenarInterfaz.agregarSubtarea(new TareaImpl("Sub-subtarea: Diseñar Diseño Responsivo"));
-        disenoApp.agregarSubtarea(disenarInterfaz);
+        investigacion.agregarSubtarea(new Tarea("Recopilar materiales"));
+        investigacion.agregarSubtarea(new Tarea("Leer artículos"));
 
-        disenoApp.agregarSubtarea(new TareaImpl("Subtarea: Documentar Requisitos"));
+        desarrollo.agregarSubtarea(new Tarea("Implementar funcionalidades"));
+        desarrollo.agregarSubtarea(new Tarea("Revisión de código"));
 
-        proyecto.agregarSubtarea(disenoApp);
+        testing.agregarSubtarea(new Tarea("Tests unitarios"));
+        testing.agregarSubtarea(new Tarea("Tests de integración"));
 
-        proyecto.imprimirTarea(0, new StringBuilder());
+        proyecto.imprimirTarea(0);
     }
 }
